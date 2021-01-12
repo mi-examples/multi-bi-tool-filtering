@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    $.ajax({"url":globalConstants.homeSite+'api/dataset_data?dataset=[Dataset ID]',
+    $.ajax({"url":globalConstants.homeSite+'api/dataset_data?dataset=' + pageSettings.datasetID,
         "headers":{"Accept":"application/json"},
         success:function(response){
             if(response.data){
@@ -25,7 +25,7 @@ $('#filters select').change(buildFilterParamets);
 
 var settings = {
     "tableau":{
-        'url': "[Tableau Link]",
+        'url': pageSettings.tableauLink,
         'aliases':{"country":"Country","channel":"Channel","product_category":"Product Category"},
         'format': function(filter, aliases){
             if(filter.val())  return '&' + aliases[filter.attr('id')]+'=' + filter.val();
@@ -36,7 +36,7 @@ var settings = {
         }
     },
     "qlik":{
-        'url': "[Qlikview Link]",
+        'url': pageSettings.qlikviewLink,
         'aliases':{"country":"country_lb","channel":"channel_lb","product_category":"category_lb"},
         'format': function(filter, aliases){
             if(filter.val())  return '&select='+aliases[filter.attr('id')]+',(' + filter.val().replace(" ", "?")+')';
